@@ -232,7 +232,11 @@ public class HidePanel extends javax.swing.JPanel {
         JDialog dialog = new JDialog();
         dialog.setSize(300, 200);
         if (image != null) {
-            
+            if (rbFile.isSelected() && file != null) {
+                
+            } else if (rbText.isSelected() && txtAreaText.getText() != null) {
+                
+            }
         } else {
             JLabel l = new JLabel("Image is null");
             dialog.add(l);
