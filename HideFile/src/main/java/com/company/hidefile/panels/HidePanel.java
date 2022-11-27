@@ -4,6 +4,8 @@
  */
 package com.company.hidefile.panels;
 
+import com.company.hidefile.bean.Config;
+import com.company.hidefile.util.FileUtil;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -11,14 +13,14 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Asus
  */
 public class HidePanel extends javax.swing.JPanel {
-    
+
     private File image = null;
     private File file = null;
 
@@ -50,7 +52,7 @@ public class HidePanel extends javax.swing.JPanel {
         rbText = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaText = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnStart = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -115,11 +117,11 @@ public class HidePanel extends javax.swing.JPanel {
         txtAreaText.setRows(5);
         jScrollPane1.setViewportView(txtAreaText);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton1.setText("Start");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnStart.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnStart.setText("Start");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnStartActionPerformed(evt);
             }
         });
 
@@ -149,14 +151,12 @@ public class HidePanel extends javax.swing.JPanel {
                             .addComponent(btnChooseFile))
                         .addGap(9, 9, 9))
                     .addGroup(pnlHideLayout.createSequentialGroup()
-                        .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblImage)
-                                .addComponent(lblInputData)
-                                .addGroup(pnlHideLayout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblImage)
+                            .addComponent(lblInputData)
+                            .addGroup(pnlHideLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(17, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHideLayout.createSequentialGroup()
                         .addComponent(jSeparator1)
@@ -164,6 +164,10 @@ public class HidePanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHideLayout.createSequentialGroup()
                         .addComponent(jSeparator2)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHideLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         pnlHideLayout.setVerticalGroup(
             pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,9 +193,9 @@ public class HidePanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addGap(18, 18, 18)
+                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -216,6 +220,25 @@ public class HidePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean hideFile(String imagePath, String filePath) {
+        try {
+            String container = imagePath;
+            String steqo_file = FileUtil.newFileName(container, FileUtil.getExtension(container));
+            FileUtil.writeBytes(steqo_file, FileUtil.readBytes(container));
+
+            String filename = filePath;
+            byte[] secret_text = FileUtil.readBytes(filename);
+            FileUtil.appendBytes(steqo_file, secret_text);
+
+            String fileExtension = FileUtil.getExtension(filename);
+            FileUtil.appendBytes(steqo_file, (Config.getExtensionKey() + fileExtension).getBytes());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     private void rbTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTextActionPerformed
         txtFile.setEnabled(false);
         txtAreaText.setEnabled(true);
@@ -228,28 +251,33 @@ public class HidePanel extends javax.swing.JPanel {
         btnChooseFile.setEnabled(false);
     }//GEN-LAST:event_rbFileActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    public static void setWarningMsg(String text, String title, int messageType) {
+        JOptionPane optionPane = new JOptionPane(text, messageType);
+        JDialog dialog = optionPane.createDialog(title);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         JDialog dialog = new JDialog();
         dialog.setSize(300, 200);
         if (image != null) {
             if (rbFile.isSelected() && file != null) {
-                
+                hideFile(image.getPath(), file.getPath());
             } else if (rbText.isSelected() && txtAreaText.getText() != null) {
-                
+
             }
         } else {
-            JLabel l = new JLabel("Image is null");
-            dialog.add(l);
-            dialog.setVisible(true);
+            setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnStartActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnChooseImage;
+    private javax.swing.JButton btnStart;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
