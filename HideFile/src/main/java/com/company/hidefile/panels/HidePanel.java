@@ -10,6 +10,8 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 /**
  *
@@ -115,6 +117,11 @@ public class HidePanel extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton1.setText("Start");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHideLayout = new javax.swing.GroupLayout(pnlHide);
         pnlHide.setLayout(pnlHideLayout);
@@ -220,6 +227,18 @@ public class HidePanel extends javax.swing.JPanel {
         txtFile.setEnabled(true);
         btnChooseFile.setEnabled(false);
     }//GEN-LAST:event_rbFileActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JDialog dialog = new JDialog();
+        dialog.setSize(300, 200);
+        if (image != null) {
+            
+        } else {
+            JLabel l = new JLabel("Image is null");
+            dialog.add(l);
+            dialog.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
