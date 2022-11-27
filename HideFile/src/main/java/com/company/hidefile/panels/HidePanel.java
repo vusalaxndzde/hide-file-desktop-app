@@ -16,6 +16,9 @@ import java.util.List;
  * @author Asus
  */
 public class HidePanel extends javax.swing.JPanel {
+    
+    private File image = null;
+    private File file = null;
 
     /**
      * Creates new form HidePanel
@@ -33,6 +36,7 @@ public class HidePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnlHide = new javax.swing.JPanel();
         lblImage = new javax.swing.JLabel();
         txtImage = new javax.swing.JTextField();
@@ -48,6 +52,9 @@ public class HidePanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
+        buttonGroup1.add(rbFile);
+        buttonGroup1.add(rbText);
+
         lblImage.setText("Image:");
 
         txtImage.setDropTarget(new DropTarget() {
@@ -56,7 +63,8 @@ public class HidePanel extends javax.swing.JPanel {
                     evt.acceptDrop(DnDConstants.ACTION_COPY);
                     List<File> droppedFiles = (List<File>) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
                     for (File file : droppedFiles) {
-                        System.out.println(file);
+                        image = file;
+                        txtImage.setText(image.getPath());
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -73,8 +81,9 @@ public class HidePanel extends javax.swing.JPanel {
                 try {
                     evt.acceptDrop(DnDConstants.ACTION_COPY);
                     List<File> droppedFiles = (List<File>) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-                    for (File file : droppedFiles) {
-                        System.out.println(file);
+                    for (File f : droppedFiles) {
+                        file = f;
+                        txtFile.setText(file.getPath());
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -192,6 +201,7 @@ public class HidePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnChooseImage;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
