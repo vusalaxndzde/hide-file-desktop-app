@@ -4,13 +4,6 @@
  */
 package com.company.hidefile.main;
 
-import java.util.List;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDropEvent;
-import java.io.File;
-
 /**
  *
  * @author Asus
@@ -33,143 +26,14 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         tbService = new javax.swing.JTabbedPane();
-        pnlHide = new javax.swing.JPanel();
-        lblImage = new javax.swing.JLabel();
-        txtImage = new javax.swing.JTextField();
-        lblInputData = new javax.swing.JLabel();
-        btnChooseImage = new javax.swing.JButton();
-        txtFile = new javax.swing.JTextField();
-        btnChooseFile = new javax.swing.JButton();
-        rbFile = new javax.swing.JRadioButton();
-        rbText = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        pnlExtract = new javax.swing.JPanel();
-
-        buttonGroup1.add(rbFile);
-        buttonGroup1.add(rbText);
+        hidePanel1 = new com.company.hidefile.panels.HidePanel();
+        extractPanel1 = new com.company.hidefile.panels.ExtractPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblImage.setText("Image:");
-
-        txtImage.setDropTarget(new DropTarget() {
-            public synchronized void drop(DropTargetDropEvent evt) {
-                try {
-                    evt.acceptDrop(DnDConstants.ACTION_COPY);
-                    List<File> droppedFiles = (List<File>) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-                    for (File file : droppedFiles) {
-                        System.out.println(file);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-
-        lblInputData.setText("Input Data:");
-
-        btnChooseImage.setText("Choose");
-
-        txtFile.setDropTarget(new DropTarget() {
-            public synchronized void drop(DropTargetDropEvent evt) {
-                try {
-                    evt.acceptDrop(DnDConstants.ACTION_COPY);
-                    List<File> droppedFiles = (List<File>) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-                    for (File file : droppedFiles) {
-                        System.out.println(file);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-
-        btnChooseFile.setText("Choose");
-
-        rbFile.setText("File");
-
-        rbText.setText("Text");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        javax.swing.GroupLayout pnlHideLayout = new javax.swing.GroupLayout(pnlHide);
-        pnlHide.setLayout(pnlHideLayout);
-        pnlHideLayout.setHorizontalGroup(
-            pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHideLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHideLayout.createSequentialGroup()
-                        .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlHideLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlHideLayout.createSequentialGroup()
-                                        .addComponent(rbText)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(pnlHideLayout.createSequentialGroup()
-                                        .addComponent(rbFile)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtFile))))
-                            .addGroup(pnlHideLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(txtImage)))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnChooseImage)
-                            .addComponent(btnChooseFile))
-                        .addGap(9, 9, 9))
-                    .addGroup(pnlHideLayout.createSequentialGroup()
-                        .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblImage)
-                            .addComponent(lblInputData)
-                            .addGroup(pnlHideLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(17, Short.MAX_VALUE))))
-        );
-        pnlHideLayout.setVerticalGroup(
-            pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHideLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(lblImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChooseImage))
-                .addGap(43, 43, 43)
-                .addComponent(lblInputData)
-                .addGap(18, 18, 18)
-                .addGroup(pnlHideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChooseFile)
-                    .addComponent(rbFile))
-                .addGap(18, 18, 18)
-                .addComponent(rbText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
-        );
-
-        tbService.addTab("Hide", pnlHide);
-
-        javax.swing.GroupLayout pnlExtractLayout = new javax.swing.GroupLayout(pnlExtract);
-        pnlExtract.setLayout(pnlExtractLayout);
-        pnlExtractLayout.setHorizontalGroup(
-            pnlExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 478, Short.MAX_VALUE)
-        );
-        pnlExtractLayout.setVerticalGroup(
-            pnlExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
-        );
-
-        tbService.addTab("Extract", pnlExtract);
+        tbService.addTab("Hide", hidePanel1);
+        tbService.addTab("Extract", extractPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,19 +85,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChooseFile;
-    private javax.swing.JButton btnChooseImage;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel lblImage;
-    private javax.swing.JLabel lblInputData;
-    private javax.swing.JPanel pnlExtract;
-    private javax.swing.JPanel pnlHide;
-    private javax.swing.JRadioButton rbFile;
-    private javax.swing.JRadioButton rbText;
+    private com.company.hidefile.panels.ExtractPanel extractPanel1;
+    private com.company.hidefile.panels.HidePanel hidePanel1;
     private javax.swing.JTabbedPane tbService;
-    private javax.swing.JTextField txtFile;
-    private javax.swing.JTextField txtImage;
     // End of variables declaration//GEN-END:variables
 }
