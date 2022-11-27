@@ -47,7 +47,7 @@ public class HidePanel extends javax.swing.JPanel {
         rbFile = new javax.swing.JRadioButton();
         rbText = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAreaText = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
@@ -93,13 +93,25 @@ public class HidePanel extends javax.swing.JPanel {
 
         btnChooseFile.setText("Choose");
 
+        rbFile.setSelected(true);
+        txtAreaText.setEnabled(false);
         rbFile.setText("File");
+        rbFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbFileActionPerformed(evt);
+            }
+        });
 
         rbText.setText("Text");
+        rbText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbTextActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtAreaText.setColumns(20);
+        txtAreaText.setRows(5);
+        jScrollPane1.setViewportView(txtAreaText);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton1.setText("Start");
@@ -197,6 +209,18 @@ public class HidePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rbTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTextActionPerformed
+        txtFile.setEnabled(false);
+        txtAreaText.setEnabled(true);
+        btnChooseFile.setEnabled(false);
+    }//GEN-LAST:event_rbTextActionPerformed
+
+    private void rbFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFileActionPerformed
+        txtAreaText.setEnabled(false);
+        txtFile.setEnabled(true);
+        btnChooseFile.setEnabled(false);
+    }//GEN-LAST:event_rbFileActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChooseFile;
@@ -206,12 +230,12 @@ public class HidePanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblInputData;
     private javax.swing.JPanel pnlHide;
     private javax.swing.JRadioButton rbFile;
     private javax.swing.JRadioButton rbText;
+    private javax.swing.JTextArea txtAreaText;
     private javax.swing.JTextField txtFile;
     private javax.swing.JTextField txtImage;
     // End of variables declaration//GEN-END:variables
