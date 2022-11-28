@@ -4,8 +4,7 @@
  */
 package com.company.hidefile.panels;
 
-import com.company.hidefile.bean.Config;
-import com.company.hidefile.util.FileUtil;
+import com.company.hidefile.service.HideService;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -220,27 +219,6 @@ public class HidePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void hide(String imagePath, byte[] secretText, String fileExtension) throws Exception {
-        String container = imagePath;
-        String steqoFile = FileUtil.newFileName(container, FileUtil.getExtension(container));
-        FileUtil.writeBytes(steqoFile, FileUtil.readBytes(container));
-
-        FileUtil.appendBytes(steqoFile, secretText);
-        FileUtil.appendBytes(steqoFile, (Config.getExtensionKey() + fileExtension).getBytes());
-    }
-
-    private void hideFile(String imagePath, String filePath) throws Exception {
-        byte[] secretText = FileUtil.readBytes(filePath);
-        String fileExtension = FileUtil.getExtension(filePath);
-        hide(imagePath, secretText, fileExtension);
-    }
-
-    private void hideText(String imagePath, String text) throws Exception {
-        byte[] secretText = text.getBytes();
-        String fileExtension = "txt";
-        hide(imagePath, secretText, fileExtension);
-    }
-
     private void rbTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTextActionPerformed
         txtFile.setEnabled(false);
         txtAreaText.setEnabled(true);
@@ -264,9 +242,9 @@ public class HidePanel extends javax.swing.JPanel {
         try {
             if (image != null) {
                 if (rbFile.isSelected() && file != null) {
-                    hideFile(image.getPath(), file.getPath());
+                    HideService.hideFile(image.getPath(), file.getPath());
                 } else if (rbText.isSelected() && txtAreaText.getText() != null) {
-                    hideText(image.getPath(), txtAreaText.getText());
+                    HideService.hideText(image.getPath(), txtAreaText.getText());
                 }
             } else {
                 setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
