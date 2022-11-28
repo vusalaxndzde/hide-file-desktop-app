@@ -212,7 +212,7 @@ public class HidePanel extends javax.swing.JPanel {
     private void rbFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFileActionPerformed
         txtAreaText.setEnabled(false);
         txtFile.setEnabled(true);
-        btnChooseFile.setEnabled(false);
+        btnChooseFile.setEnabled(true);
     }//GEN-LAST:event_rbFileActionPerformed
 
     public static void setWarningMsg(String text, String title, int messageType) {
