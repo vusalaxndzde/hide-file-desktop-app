@@ -243,7 +243,7 @@ public class HidePanel extends javax.swing.JPanel {
             setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         if (isSaved) {
-            setWarningMsg("Successful", "Successful", JOptionPane.INFORMATION_MESSAGE);
+            setWarningMsg("Finished!", "Hide Text", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
