@@ -225,11 +225,11 @@ public class HidePanel extends javax.swing.JPanel {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         boolean isSaved = false;
         try {
-            if (image != null) {
-                if (rbFile.isSelected() && file != null) {
-                    HideService.hideFile(image.getPath(), file.getPath());
+            if (!txtImage.getText().trim().equals("")) {
+                if (rbFile.isSelected() && !txtFile.getText().trim().equals("")) {
+                    HideService.hideFile(image.getPath(), txtFile.getText());
                     isSaved = true;
-                } else if (rbText.isSelected() && txtAreaText.getText() != null) {
+                } else if (rbText.isSelected() && !txtAreaText.getText().equals("")) {
                     HideService.hideText(image.getPath(), txtAreaText.getText());
                     isSaved = true;
                 } else {
