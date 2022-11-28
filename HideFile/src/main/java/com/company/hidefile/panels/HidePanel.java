@@ -12,6 +12,8 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -231,6 +233,24 @@ public class HidePanel extends javax.swing.JPanel {
             FileUtil.appendBytes(steqo_file, secret_text);
 
             String fileExtension = FileUtil.getExtension(filename);
+            FileUtil.appendBytes(steqo_file, (Config.getExtensionKey() + fileExtension).getBytes());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean hideText(String imagePath, String text) {
+        try {
+            String container = imagePath;
+            String steqo_file = FileUtil.newFileName(container, FileUtil.getExtension(container));
+            FileUtil.writeBytes(steqo_file, FileUtil.readBytes(container));
+            
+            byte[] secret_text = text.getBytes();
+            FileUtil.appendBytes(steqo_file, secret_text);
+
+            String fileExtension = "txt";
             FileUtil.appendBytes(steqo_file, (Config.getExtensionKey() + fileExtension).getBytes());
         } catch (Exception ex) {
             ex.printStackTrace();
