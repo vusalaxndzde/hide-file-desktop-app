@@ -222,18 +222,20 @@ public class HidePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void hide(String imagePath, byte[] secretText, String fileExtension) throws Exception {
+        String container = imagePath;
+        String steqoFile = FileUtil.newFileName(container, FileUtil.getExtension(container));
+        FileUtil.writeBytes(steqoFile, FileUtil.readBytes(container));
+
+        FileUtil.appendBytes(steqoFile, secretText);
+        FileUtil.appendBytes(steqoFile, (Config.getExtensionKey() + fileExtension).getBytes());
+    }
+
     private boolean hideFile(String imagePath, String filePath) {
         try {
-            String container = imagePath;
-            String steqo_file = FileUtil.newFileName(container, FileUtil.getExtension(container));
-            FileUtil.writeBytes(steqo_file, FileUtil.readBytes(container));
-
-            String filename = filePath;
-            byte[] secret_text = FileUtil.readBytes(filename);
-            FileUtil.appendBytes(steqo_file, secret_text);
-
-            String fileExtension = FileUtil.getExtension(filename);
-            FileUtil.appendBytes(steqo_file, (Config.getExtensionKey() + fileExtension).getBytes());
+            byte[] secretText = FileUtil.readBytes(filePath);
+            String fileExtension = FileUtil.getExtension(filePath);
+            hide(imagePath, secretText, fileExtension);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -243,15 +245,9 @@ public class HidePanel extends javax.swing.JPanel {
 
     private boolean hideText(String imagePath, String text) {
         try {
-            String container = imagePath;
-            String steqo_file = FileUtil.newFileName(container, FileUtil.getExtension(container));
-            FileUtil.writeBytes(steqo_file, FileUtil.readBytes(container));
-            
-            byte[] secret_text = text.getBytes();
-            FileUtil.appendBytes(steqo_file, secret_text);
-
+            byte[] secretText = text.getBytes();
             String fileExtension = "txt";
-            FileUtil.appendBytes(steqo_file, (Config.getExtensionKey() + fileExtension).getBytes());
+            hide(imagePath, secretText, fileExtension);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
