@@ -239,18 +239,24 @@ public class HidePanel extends javax.swing.JPanel {
     }
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        boolean isSaved = false;
         try {
             if (image != null) {
                 if (rbFile.isSelected() && file != null) {
                     HideService.hideFile(image.getPath(), file.getPath());
+                    isSaved = true;
                 } else if (rbText.isSelected() && txtAreaText.getText() != null) {
                     HideService.hideText(image.getPath(), txtAreaText.getText());
+                    isSaved = true;
                 }
             } else {
                 setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception ex) {
             setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (isSaved) {
+            setWarningMsg("Successful", "Successful", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
