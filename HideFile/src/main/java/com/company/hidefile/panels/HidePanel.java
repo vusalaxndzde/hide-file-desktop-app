@@ -261,8 +261,6 @@ public class HidePanel extends javax.swing.JPanel {
     }
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        JDialog dialog = new JDialog();
-        dialog.setSize(300, 200);
         try {
             if (image != null) {
                 if (rbFile.isSelected() && file != null) {
