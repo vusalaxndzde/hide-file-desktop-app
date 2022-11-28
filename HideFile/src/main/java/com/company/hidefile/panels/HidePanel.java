@@ -12,8 +12,6 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -265,22 +263,18 @@ public class HidePanel extends javax.swing.JPanel {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         JDialog dialog = new JDialog();
         dialog.setSize(300, 200);
-        if (image != null) {
-            if (rbFile.isSelected() && file != null) {
-                try {
+        try {
+            if (image != null) {
+                if (rbFile.isSelected() && file != null) {
                     hideFile(image.getPath(), file.getPath());
-                } catch (Exception ex) {
-                    setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else if (rbText.isSelected() && txtAreaText.getText() != null) {
-                try {
+                } else if (rbText.isSelected() && txtAreaText.getText() != null) {
                     hideText(image.getPath(), txtAreaText.getText());
-                } catch (Exception ex) {
-                    setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            } else {
+                setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
