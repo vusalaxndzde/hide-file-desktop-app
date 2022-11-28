@@ -231,28 +231,16 @@ public class HidePanel extends javax.swing.JPanel {
         FileUtil.appendBytes(steqoFile, (Config.getExtensionKey() + fileExtension).getBytes());
     }
 
-    private boolean hideFile(String imagePath, String filePath) {
-        try {
-            byte[] secretText = FileUtil.readBytes(filePath);
-            String fileExtension = FileUtil.getExtension(filePath);
-            hide(imagePath, secretText, fileExtension);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
+    private void hideFile(String imagePath, String filePath) throws Exception {
+        byte[] secretText = FileUtil.readBytes(filePath);
+        String fileExtension = FileUtil.getExtension(filePath);
+        hide(imagePath, secretText, fileExtension);
     }
 
-    private boolean hideText(String imagePath, String text) {
-        try {
-            byte[] secretText = text.getBytes();
-            String fileExtension = "txt";
-            hide(imagePath, secretText, fileExtension);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
+    private void hideText(String imagePath, String text) throws Exception {
+        byte[] secretText = text.getBytes();
+        String fileExtension = "txt";
+        hide(imagePath, secretText, fileExtension);
     }
 
     private void rbTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTextActionPerformed
@@ -279,9 +267,17 @@ public class HidePanel extends javax.swing.JPanel {
         dialog.setSize(300, 200);
         if (image != null) {
             if (rbFile.isSelected() && file != null) {
-                hideFile(image.getPath(), file.getPath());
+                try {
+                    hideFile(image.getPath(), file.getPath());
+                } catch (Exception ex) {
+                    setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else if (rbText.isSelected() && txtAreaText.getText() != null) {
-
+                try {
+                    hideText(image.getPath(), txtAreaText.getText());
+                } catch (Exception ex) {
+                    setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else {
             setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
