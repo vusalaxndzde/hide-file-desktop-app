@@ -274,6 +274,8 @@ public class HidePanel extends javax.swing.JPanel {
 
     private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
         JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        FileFilter filter = new FileNameExtensionFilter("(*.docx;*.doc;*.txt;*.pdf)", "docx", "doc", "txt", "pdf");
+        fileChooser.setFileFilter(filter);
         int r = fileChooser.showOpenDialog(null);
         if (r == JFileChooser.APPROVE_OPTION) {
             file = fileChooser.getSelectedFile();
