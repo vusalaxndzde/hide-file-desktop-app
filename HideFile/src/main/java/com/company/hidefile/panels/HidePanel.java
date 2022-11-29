@@ -8,7 +8,9 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileSystemView;
 
 public class HidePanel extends javax.swing.JPanel {
 
@@ -62,6 +64,11 @@ public class HidePanel extends javax.swing.JPanel {
         lblInputData.setText("Input Data:");
 
         btnChooseImage.setText("Choose");
+        btnChooseImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChooseImageActionPerformed(evt);
+            }
+        });
 
         txtFile.setDropTarget(new DropTarget() {
             public synchronized void drop(DropTargetDropEvent evt) {
@@ -246,6 +253,15 @@ public class HidePanel extends javax.swing.JPanel {
             setWarningMsg("Finished!", "Hide Text", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnStartActionPerformed
+
+    private void btnChooseImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseImageActionPerformed
+        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int r = fileChooser.showOpenDialog(null);
+        if (r == JFileChooser.APPROVE_OPTION) {
+            image = fileChooser.getSelectedFile();
+        }
+        txtImage.setText(image.getPath());
+    }//GEN-LAST:event_btnChooseImageActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
