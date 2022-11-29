@@ -259,8 +259,8 @@ public class HidePanel extends javax.swing.JPanel {
         int r = fileChooser.showOpenDialog(null);
         if (r == JFileChooser.APPROVE_OPTION) {
             image = fileChooser.getSelectedFile();
+            txtImage.setText(image.getPath());
         }
-        txtImage.setText(image.getPath());
     }//GEN-LAST:event_btnChooseImageActionPerformed
 
 
