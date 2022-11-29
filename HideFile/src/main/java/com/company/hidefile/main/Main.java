@@ -15,6 +15,7 @@ public class Main extends javax.swing.JFrame {
         extractPanel1 = new com.company.hidefile.panels.ExtractPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hide File");
 
         tbService.addTab("Hide", hidePanel1);
         tbService.addTab("Extract", extractPanel1);
@@ -30,7 +31,10 @@ public class Main extends javax.swing.JFrame {
             .addComponent(tbService)
         );
 
+        getAccessibleContext().setAccessibleDescription("hide and extract file");
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]) {
