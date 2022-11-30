@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
@@ -53,27 +53,35 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
-                      <Component id="txtImage" alignment="1" max="32767" attributes="0"/>
-                      <Component id="txtFile" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rbOutFile" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="rbOutText" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblImage" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="btnStart" min="-2" pref="126" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="rbOutFile" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbOutText" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblImage" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txtFile" min="-2" pref="381" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnChooseFile" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txtImage" min="-2" pref="381" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnChooseImage" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <Component id="jSeparator1" min="-2" pref="472" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Component id="jSeparator2" max="32767" attributes="0"/>
           </Group>
@@ -84,13 +92,19 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="lblImage" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtImage" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtImage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnChooseImage" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="rbOutFile" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtFile" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnChooseFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="rbOutText" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -111,6 +125,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtImage">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtImage.setDropTarget(new DropTarget() {&#xa;            public synchronized void drop(DropTargetDropEvent evt) {&#xa;                try {&#xa;                    evt.acceptDrop(DnDConstants.ACTION_COPY);&#xa;                    List&lt;File&gt; droppedFiles = (List&lt;File&gt;) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);&#xa;                    for (File file : droppedFiles) {&#xa;                        image = file;&#xa;                        txtImage.setText(image.getPath());&#xa;                    }&#xa;                } catch (Exception ex) {&#xa;                    ex.printStackTrace();&#xa;                }&#xa;            }&#xa;        });"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbOutFile">
           <Properties>
@@ -118,6 +135,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFile">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtFile.setDropTarget(new DropTarget() {&#xa;            public synchronized void drop(DropTargetDropEvent evt) {&#xa;                try {&#xa;                    evt.acceptDrop(DnDConstants.ACTION_COPY);&#xa;                    List&lt;File&gt; droppedFiles = (List&lt;File&gt;) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);&#xa;                    for (File f : droppedFiles) {&#xa;                        file = f;&#xa;                        txtImage.setText(image.getPath());&#xa;                    }&#xa;                } catch (Exception ex) {&#xa;                    ex.printStackTrace();&#xa;                }&#xa;            }&#xa;        });"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbOutText">
           <Properties>
@@ -153,6 +173,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnChooseImage">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Choose"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChooseImageActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnChooseFile">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Choose"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
