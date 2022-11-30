@@ -62,6 +62,11 @@ public class ExtractPanel extends javax.swing.JPanel {
         });
 
         btnChooseFile.setText("Choose");
+        btnChooseFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChooseFileActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlExtractLayout = new javax.swing.GroupLayout(pnlExtract);
         pnlExtract.setLayout(pnlExtractLayout);
@@ -185,6 +190,17 @@ public class ExtractPanel extends javax.swing.JPanel {
             txtImage.setText(image.getPath());
         }
     }//GEN-LAST:event_btnChooseImageActionPerformed
+
+    private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
+        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        FileFilter filter = new FileNameExtensionFilter("(*.docx;*.doc;*.txt;*.pdf)", "docx", "doc", "txt", "pdf");
+        fileChooser.setFileFilter(filter);
+        int r = fileChooser.showOpenDialog(null);
+        if (r == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            txtFile.setText(file.getPath());
+        }
+    }//GEN-LAST:event_btnChooseFileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
