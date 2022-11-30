@@ -40,11 +40,24 @@ public class ExtractPanel extends javax.swing.JPanel {
         btnChooseFile = new javax.swing.JButton();
         progressPanel1 = new com.company.hidefile.panels.ProgressPanel();
 
+        buttonGroup1.add(rbOutFile);
+        buttonGroup1.add(rbOutText);
+
         lblImage.setText("Image:");
 
         rbOutFile.setText("Output to File");
+        rbOutFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbOutFileActionPerformed(evt);
+            }
+        });
 
         rbOutText.setText("Output Text");
+        rbOutText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbOutTextActionPerformed(evt);
+            }
+        });
 
         txtAreaText.setColumns(20);
         txtAreaText.setRows(5);
@@ -201,6 +214,18 @@ public class ExtractPanel extends javax.swing.JPanel {
             txtFile.setText(file.getPath());
         }
     }//GEN-LAST:event_btnChooseFileActionPerformed
+
+    private void rbOutFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbOutFileActionPerformed
+        txtAreaText.setEnabled(false);
+        txtFile.setEnabled(true);
+        btnChooseFile.setEnabled(true);
+    }//GEN-LAST:event_rbOutFileActionPerformed
+
+    private void rbOutTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbOutTextActionPerformed
+        txtAreaText.setEnabled(true);
+        txtFile.setEnabled(false);
+        btnChooseFile.setEnabled(false);
+    }//GEN-LAST:event_rbOutTextActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
