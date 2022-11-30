@@ -1,5 +1,6 @@
 package com.company.hidefile.panels;
 
+import com.company.hidefile.WarningMessage;
 import com.company.hidefile.service.HideService;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
@@ -7,7 +8,6 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
@@ -233,12 +233,7 @@ public class HidePanel extends javax.swing.JPanel {
         btnChooseFile.setEnabled(true);
     }//GEN-LAST:event_rbFileActionPerformed
 
-    public static void setWarningMsg(String text, String title, int messageType) {
-        JOptionPane optionPane = new JOptionPane(text, messageType);
-        JDialog dialog = optionPane.createDialog(title);
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
-    }
+    
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         boolean isSaved = false;
@@ -253,17 +248,17 @@ public class HidePanel extends javax.swing.JPanel {
                     isSaved = true;
                     pnlProgress.fill();
                 } else {
-                    setWarningMsg("Something went wrong. Blanks are not filled correctly", "Warning!", 
+                    WarningMessage.setWarningMsg("Something went wrong. Blanks are not filled correctly", "Warning!", 
                             JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
+                WarningMessage.setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception ex) {
-            setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
+            WarningMessage.setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         if (isSaved) {
-            setWarningMsg("Finished!", "Hide Text", JOptionPane.INFORMATION_MESSAGE);
+            WarningMessage.setWarningMsg("Finished!", "Hide Text", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
