@@ -42,6 +42,7 @@ public class HidePanel extends javax.swing.JPanel {
         btnStart = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        pnlProgress = new com.company.hidefile.panels.ProgressPanel();
 
         buttonGroup1.add(rbFile);
         buttonGroup1.add(rbText);
@@ -192,28 +193,31 @@ public class HidePanel extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 478, Short.MAX_VALUE)
+            .addComponent(pnlProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(8, Short.MAX_VALUE)
                     .addComponent(pnlHide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(8, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(579, Short.MAX_VALUE)
+                .addComponent(pnlProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(26, Short.MAX_VALUE)
                     .addComponent(pnlHide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(49, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -243,9 +247,11 @@ public class HidePanel extends javax.swing.JPanel {
                 if (rbFile.isSelected() && !txtFile.getText().trim().equals("")) {
                     HideService.hideFile(image.getPath(), txtFile.getText());
                     isSaved = true;
+                    pnlProgress.fill();
                 } else if (rbText.isSelected() && !txtAreaText.getText().equals("")) {
                     HideService.hideText(image.getPath(), txtAreaText.getText());
                     isSaved = true;
+                    pnlProgress.fill();
                 } else {
                     setWarningMsg("Something went wrong. Blanks are not filled correctly", "Warning!", 
                             JOptionPane.WARNING_MESSAGE);
@@ -294,6 +300,7 @@ public class HidePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblInputData;
     private javax.swing.JPanel pnlHide;
+    private com.company.hidefile.panels.ProgressPanel pnlProgress;
     private javax.swing.JRadioButton rbFile;
     private javax.swing.JRadioButton rbText;
     private javax.swing.JTextArea txtAreaText;
