@@ -1,5 +1,7 @@
 package com.company.hidefile.panels;
 
+import com.company.hidefile.WarningMessage;
+import com.company.hidefile.service.ExtractService;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -7,6 +9,7 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -35,7 +38,7 @@ public class ExtractPanel extends javax.swing.JPanel {
         btnStart = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         btnChooseImage = new javax.swing.JButton();
-        progressPanel1 = new com.company.hidefile.panels.ProgressPanel();
+        pnlProgress = new com.company.hidefile.panels.ProgressPanel();
 
         buttonGroup1.add(rbOutFile);
         buttonGroup1.add(rbOutText);
@@ -154,7 +157,7 @@ public class ExtractPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(progressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +165,7 @@ public class ExtractPanel extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(pnlExtract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(progressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -187,7 +190,28 @@ public class ExtractPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rbOutTextActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        
+        boolean isSaved = false;
+        try {
+            if (!txtImage.getText().trim().equals("")) {
+                byte[] secretArr = ExtractService.extract(txtImage.getText());
+                if (rbOutFile.isSelected()) {
+                    ExtractService.saveExtract(secretArr);
+                    isSaved = true;
+                    pnlProgress.fill();
+                } else if (rbOutText.isSelected()) {
+                    txtAreaText.setText(new String(secretArr));
+                    isSaved = true;
+                    pnlProgress.fill();
+                }
+            } else {
+                WarningMessage.setWarningMsg("Select image", "Warning!", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception ex) {
+            WarningMessage.setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (isSaved) {
+            WarningMessage.setWarningMsg("Finished!", "Hide Text", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnStartActionPerformed
 
 
@@ -200,7 +224,7 @@ public class ExtractPanel extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblImage;
     private javax.swing.JPanel pnlExtract;
-    private com.company.hidefile.panels.ProgressPanel progressPanel1;
+    private com.company.hidefile.panels.ProgressPanel pnlProgress;
     private javax.swing.JRadioButton rbOutFile;
     private javax.swing.JRadioButton rbOutText;
     private javax.swing.JTextArea txtAreaText;
