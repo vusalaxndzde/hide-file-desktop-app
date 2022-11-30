@@ -67,11 +67,6 @@
                               <Component id="rbOutText" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblImage" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtFile" min="-2" pref="381" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnChooseFile" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="txtImage" min="-2" pref="381" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnChooseImage" min="-2" max="-2" attributes="0"/>
@@ -103,16 +98,11 @@
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="rbOutFile" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnChooseFile" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="rbOutText" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="182" max="-2" attributes="0"/>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="217" max="-2" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnStart" min="-2" pref="95" max="-2" attributes="0"/>
@@ -139,10 +129,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbOutFileActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtFile">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtFile.setDropTarget(new DropTarget() {&#xa;            public synchronized void drop(DropTargetDropEvent evt) {&#xa;                try {&#xa;                    evt.acceptDrop(DnDConstants.ACTION_COPY);&#xa;                    List&lt;File&gt; droppedFiles = (List&lt;File&gt;) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);&#xa;                    for (File f : droppedFiles) {&#xa;                        file = f;&#xa;                        txtImage.setText(image.getPath());&#xa;                    }&#xa;                } catch (Exception ex) {&#xa;                    ex.printStackTrace();&#xa;                }&#xa;            }&#xa;        });"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rbOutFile.setSelected(true);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbOutText">
@@ -180,6 +168,9 @@
               <Dimension value="[84, 38]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStartActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>
@@ -189,14 +180,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChooseImageActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnChooseFile">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Choose"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChooseFileActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

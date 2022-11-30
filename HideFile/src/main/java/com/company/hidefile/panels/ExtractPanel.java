@@ -14,7 +14,6 @@ import javax.swing.filechooser.FileSystemView;
 public class ExtractPanel extends javax.swing.JPanel {
     
     private File image = null;
-    private File file = null;
 
     public ExtractPanel() {
         initComponents();
@@ -29,7 +28,6 @@ public class ExtractPanel extends javax.swing.JPanel {
         lblImage = new javax.swing.JLabel();
         txtImage = new javax.swing.JTextField();
         rbOutFile = new javax.swing.JRadioButton();
-        txtFile = new javax.swing.JTextField();
         rbOutText = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaText = new javax.swing.JTextArea();
@@ -37,7 +35,6 @@ public class ExtractPanel extends javax.swing.JPanel {
         btnStart = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         btnChooseImage = new javax.swing.JButton();
-        btnChooseFile = new javax.swing.JButton();
         progressPanel1 = new com.company.hidefile.panels.ProgressPanel();
 
         buttonGroup1.add(rbOutFile);
@@ -45,6 +42,7 @@ public class ExtractPanel extends javax.swing.JPanel {
 
         lblImage.setText("Image:");
 
+        rbOutFile.setSelected(true);
         rbOutFile.setText("Output to File");
         rbOutFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,18 +64,16 @@ public class ExtractPanel extends javax.swing.JPanel {
         btnStart.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnStart.setText("Start");
         btnStart.setPreferredSize(new java.awt.Dimension(84, 38));
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         btnChooseImage.setText("Choose");
         btnChooseImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChooseImageActionPerformed(evt);
-            }
-        });
-
-        btnChooseFile.setText("Choose");
-        btnChooseFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChooseFileActionPerformed(evt);
             }
         });
 
@@ -98,10 +94,6 @@ public class ExtractPanel extends javax.swing.JPanel {
                             .addComponent(rbOutFile, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rbOutText, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblImage, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlExtractLayout.createSequentialGroup()
-                                .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnChooseFile))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlExtractLayout.createSequentialGroup()
                                 .addComponent(txtImage, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -126,15 +118,11 @@ public class ExtractPanel extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(rbOutFile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlExtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChooseFile))
                 .addGap(18, 18, 18)
                 .addComponent(rbOutText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,20 +136,6 @@ public class ExtractPanel extends javax.swing.JPanel {
                     List<File> droppedFiles = (List<File>) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
                     for (File file : droppedFiles) {
                         image = file;
-                        txtImage.setText(image.getPath());
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        txtFile.setDropTarget(new DropTarget() {
-            public synchronized void drop(DropTargetDropEvent evt) {
-                try {
-                    evt.acceptDrop(DnDConstants.ACTION_COPY);
-                    List<File> droppedFiles = (List<File>) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-                    for (File f : droppedFiles) {
-                        file = f;
                         txtImage.setText(image.getPath());
                     }
                 } catch (Exception ex) {
@@ -204,32 +178,20 @@ public class ExtractPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnChooseImageActionPerformed
 
-    private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
-        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        FileFilter filter = new FileNameExtensionFilter("(*.docx;*.doc;*.txt;*.pdf)", "docx", "doc", "txt", "pdf");
-        fileChooser.setFileFilter(filter);
-        int r = fileChooser.showOpenDialog(null);
-        if (r == JFileChooser.APPROVE_OPTION) {
-            file = fileChooser.getSelectedFile();
-            txtFile.setText(file.getPath());
-        }
-    }//GEN-LAST:event_btnChooseFileActionPerformed
-
     private void rbOutFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbOutFileActionPerformed
         txtAreaText.setEnabled(false);
-        txtFile.setEnabled(true);
-        btnChooseFile.setEnabled(true);
     }//GEN-LAST:event_rbOutFileActionPerformed
 
     private void rbOutTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbOutTextActionPerformed
         txtAreaText.setEnabled(true);
-        txtFile.setEnabled(false);
-        btnChooseFile.setEnabled(false);
     }//GEN-LAST:event_rbOutTextActionPerformed
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        
+    }//GEN-LAST:event_btnStartActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnChooseImage;
     private javax.swing.JButton btnStart;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -242,7 +204,6 @@ public class ExtractPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbOutFile;
     private javax.swing.JRadioButton rbOutText;
     private javax.swing.JTextArea txtAreaText;
-    private javax.swing.JTextField txtFile;
     private javax.swing.JTextField txtImage;
     // End of variables declaration//GEN-END:variables
 }
