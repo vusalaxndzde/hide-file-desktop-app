@@ -13,6 +13,7 @@ public class Main extends javax.swing.JFrame {
         tbService = new javax.swing.JTabbedPane();
         hidePanel1 = new com.company.hidefile.panels.HidePanel();
         extractPanel1 = new com.company.hidefile.panels.ExtractPanel();
+        progressPanel1 = new com.company.hidefile.panels.ProgressPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hide File");
@@ -25,10 +26,18 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tbService)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(progressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbService)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tbService, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(progressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("hide and extract file");
@@ -72,6 +81,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.company.hidefile.panels.ExtractPanel extractPanel1;
     private com.company.hidefile.panels.HidePanel hidePanel1;
+    private com.company.hidefile.panels.ProgressPanel progressPanel1;
     private javax.swing.JTabbedPane tbService;
     // End of variables declaration//GEN-END:variables
 }
