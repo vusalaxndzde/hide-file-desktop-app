@@ -127,7 +127,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbOutFileActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rbOutFile.setSelected(true);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rbOutFile.setSelected(true);&#xa;txtAreaText.setEnabled(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbOutText">

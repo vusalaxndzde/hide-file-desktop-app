@@ -46,6 +46,7 @@ public class ExtractPanel extends javax.swing.JPanel {
         lblImage.setText("Image:");
 
         rbOutFile.setSelected(true);
+        txtAreaText.setEnabled(false);
         rbOutFile.setText("Output to File");
         rbOutFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,11 +194,12 @@ public class ExtractPanel extends javax.swing.JPanel {
             if (!txtImage.getText().trim().equals("")) {
                 byte[] secretArr = ExtractService.extract(txtImage.getText());
                 if (rbOutFile.isSelected()) {
-                    ExtractService.saveExtract(secretArr);
+                    ExtractService.extractToFile(secretArr);
                     isSaved = true;
                     pnlProgress.fill();
                 } else if (rbOutText.isSelected()) {
-                    txtAreaText.setText(new String(secretArr));
+                    String s = new String(secretArr);
+                    txtAreaText.setText(s);
                     isSaved = true;
                     pnlProgress.fill();
                 }

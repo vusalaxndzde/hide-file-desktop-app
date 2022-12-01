@@ -20,10 +20,10 @@ public class ExtractService {
         return getSecretContent(hexCode, indexExt, extKey, content);
     }
     
-    public static void saveExtract(byte[] secretArr) throws Exception {
+    public static void extractToFile(byte[] secretArr) throws Exception {
         FileUtil.writeBytes(FileUtil.newFileName(stegoFile, extStr), secretArr);
     }
-
+    
     private static byte[] getSecretContent(String hexCode, int indexExt, String extKey, byte[] content) {
         byte[] key = hexStringToByteArray(hexCode);
         int index = findSecretContentIndex(content, key);
