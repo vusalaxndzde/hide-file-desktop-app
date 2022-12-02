@@ -190,11 +190,12 @@ public class ExtractPanel extends javax.swing.JPanel {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         boolean isSaved = false;
+        ExtractService extractS = new ExtractService();
         try {
             if (!txtImage.getText().trim().equals("")) {
-                byte[] secretArr = ExtractService.extract(txtImage.getText());
+                byte[] secretArr = extractS.extract(txtImage.getText());
                 if (rbOutFile.isSelected()) {
-                    ExtractService.extractToFile(secretArr);
+                    extractS.extractToFile(secretArr);
                     isSaved = true;
                     pnlProgress.fill();
                 } else if (rbOutText.isSelected()) {

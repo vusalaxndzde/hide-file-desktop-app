@@ -5,10 +5,10 @@ import com.company.hidefile.util.FileUtil;
 
 public class ExtractService {
     
-    private static String extStr;
-    private static String stegoFile;
+    private String extStr;
+    private String stegoFile;
     
-    public static byte[] extract(String imagePath) throws Exception {
+    public byte[] extract(String imagePath) throws Exception {
         stegoFile = imagePath;
         byte[] content = FileUtil.readBytes(stegoFile);
 
@@ -20,11 +20,11 @@ public class ExtractService {
         return getSecretContent(hexCode, indexExt, extKey, content);
     }
     
-    public static void extractToFile(byte[] secretArr) throws Exception {
+    public void extractToFile(byte[] secretArr) throws Exception {
         FileUtil.writeBytes(FileUtil.newFileName(stegoFile, extStr), secretArr);
     }
     
-    private static byte[] getSecretContent(String hexCode, int indexExt, String extKey, byte[] content) {
+    private byte[] getSecretContent(String hexCode, int indexExt, String extKey, byte[] content) {
         byte[] key = hexStringToByteArray(hexCode);
         int index = findSecretContentIndex(content, key);
         byte[] secretArr = new byte[indexExt - extKey.length() - index];
@@ -34,7 +34,7 @@ public class ExtractService {
         return secretArr;
     }
 
-    private static String getExtension(int indexExt, byte[] content) {
+    private String getExtension(int indexExt, byte[] content) {
         byte[] extArr = new byte[content.length - indexExt];
         for (int i = 0; i < extArr.length; i++, indexExt++) {
             extArr[i] = content[indexExt];
@@ -42,7 +42,7 @@ public class ExtractService {
         return new String(extArr);
     }
 
-    private static int findSecretContentIndex(byte[] content, byte[] key) {
+    private int findSecretContentIndex(byte[] content, byte[] key) {
         int index = 0;
         for (int i = 0; i < content.length; i++) {
             if (content[i] == key[0]) {
@@ -54,7 +54,7 @@ public class ExtractService {
         return index;
     }
 
-    private static int findExtensionIndex(byte[] content, String extKeyStr) {
+    private int findExtensionIndex(byte[] content, String extKeyStr) {
         byte[] extKey = extKeyStr.getBytes();
         int index = 0;
         for (int i = 0; i < content.length; i++) {
@@ -68,7 +68,7 @@ public class ExtractService {
         return index;
     }
 
-    private static boolean check(int index, byte[] content, byte[] extKey) {
+    private boolean check(int index, byte[] content, byte[] extKey) {
         int keyIndex = 0;
         while (keyIndex != extKey.length) {
             if (extKey[keyIndex] != content[index]) {
@@ -80,7 +80,7 @@ public class ExtractService {
         return true;
     }
 
-    private static byte[] hexStringToByteArray(String s) {
+    private byte[] hexStringToByteArray(String s) {
         int len = s.length();
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
