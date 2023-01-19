@@ -13,6 +13,8 @@ public class ProgressPanel extends javax.swing.JPanel {
         pnlProgress = new javax.swing.JPanel();
         pbProgress = new javax.swing.JProgressBar();
 
+        pbProgress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout pnlProgressLayout = new javax.swing.GroupLayout(pnlProgress);
         pnlProgress.setLayout(pnlProgressLayout);
         pnlProgressLayout.setHorizontalGroup(
