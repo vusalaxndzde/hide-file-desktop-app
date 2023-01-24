@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.company.hidefile.service;
 
 import com.company.hidefile.bean.Config;
 import com.company.hidefile.util.FileUtil;
 
-/**
- *
- * @author Asus
- */
 public class HideService {
     
     private static void hide(String imagePath, byte[] secretText, String fileExtension) throws Exception {
