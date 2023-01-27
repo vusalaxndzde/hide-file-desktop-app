@@ -211,7 +211,7 @@ public class ExtractPanel extends javax.swing.JPanel {
             WarningMessage.setWarningMsg("Error!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         if (isSaved) {
-            WarningMessage.setWarningMsg("Finished!", "Extract", JOptionPane.INFORMATION_MESSAGE);
+            WarningMessage.setWarningMsg("Extract finished!", "Extract", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
